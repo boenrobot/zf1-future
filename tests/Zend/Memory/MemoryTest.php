@@ -72,7 +72,7 @@ class Zend_Memory_MemoryTest extends TestCase
         }
 
         foreach (scandir($dir) as $item) {
-            if ($item == '.' || $item == '..') {
+            if ($item === '.' || $item === '..') {
                 continue;
             }
             $this->_removeCacheDir($dir . '/' . $item);
@@ -103,10 +103,10 @@ class Zend_Memory_MemoryTest extends TestCase
      * @group ZF-9883
      * @dataProvider Zend_Memory_MemoryTest::providerCacheBackend
      */
-    public function testFactoryCacheBackendStandards($backend)
+    public function testFactoryCacheBackendStandards($backend, $backendOptions)
     {
         try {
-            $memoryManager = Zend_Memory::factory($backend);
+            $memoryManager = Zend_Memory::factory($backend, $backendOptions);
         } catch (Zend_Cache_Exception $exception) {
             $this->markTestSkipped($exception->getMessage());
         }
@@ -119,16 +119,16 @@ class Zend_Memory_MemoryTest extends TestCase
     public function providerCacheBackend()
     {
         return [
-            'Zend_Cache_Backend_Apc' => ['Apc'],
-            'Zend_Cache_Backend_File' => ['File'],
-            'Zend_Cache_Backend_Libmemcached' => ['Libmemcached'],
-            'Zend_Cache_Backend_Memcached' => ['Memcached'],
-            'Zend_Cache_Backend_Sqlite' => ['Sqlite'],
-            'Zend_Cache_Backend_TwoLevels' => ['TwoLevels'],
-            'Zend_Cache_Backend_TwoLevels' => ['Xcache'],
-            'Zend_Cache_Backend_ZendPlatform' => ['ZendPlatform'],
-            'Zend_Cache_Backend_ZendServer_Disk' => ['ZendServer_Disk'],
-            'Zend_Cache_Backend_ZendServer_ShMem    ' => ['ZendServer_ShMem']
+            Zend_Cache_Backend_Apc::class => ['Apc', []],
+            Zend_Cache_Backend_File::class => ['File', []],
+            Zend_Cache_Backend_Libmemcached::class => ['Libmemcached', []],
+            Zend_Cache_Backend_Memcached::class => ['Memcached', []],
+            Zend_Cache_Backend_Sqlite::class => ['Sqlite', ['cache_db_complete_path' => ':memory:']],
+            Zend_Cache_Backend_TwoLevels::class => ['TwoLevels', []],
+            Zend_Cache_Backend_Xcache::class => ['Xcache', []],
+            Zend_Cache_Backend_ZendPlatform::class => ['ZendPlatform', []],
+            Zend_Cache_Backend_ZendServer_Disk::class => ['ZendServer_Disk', []],
+            Zend_Cache_Backend_ZendServer_ShMem::class => ['ZendServer_ShMem', []]
         ];
     }
 }

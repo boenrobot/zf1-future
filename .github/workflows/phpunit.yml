@@ -10,6 +10,7 @@ jobs:
 
     env:
       PHP_INI_VALUES: memory_limit=-1, assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
+      XDEBUG_MODE: coverage
 
       TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED: true
       TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME: github
@@ -24,6 +25,7 @@ jobs:
 
       TESTS_ZEND_CACHE_SQLITE_ENABLED: true
       TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED: true
+      TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED: true
 
       TESTS_ZEND_CACHE_MEMCACHED_ENABLED: true
       TESTS_ZEND_CACHE_MEMCACHED_HOST: 127.0.0.1
@@ -114,15 +116,15 @@ jobs:
           #bare for PHP >=7.2
           - php-extensions-bare: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring"
           #full for PHP <= 8.0
-          - php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, fileinfo, zip, sqlite, soap, bcmath, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt, rar"
+          - php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, xdebug, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, pdo_pgsql, fileinfo, zip, sqlite, soap, bcmath, gmp, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt, rar"
           - php-version: "7.1"
             php-extensions-bare: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer"
           - php-version: "8.1"
-            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, fileinfo, zip, sqlite, soap, bcmath, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt"
+            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, xdebug, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, pdo_pgsql, fileinfo, zip, sqlite, soap, bcmath, gmp, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt"
           - php-version: "8.2"
-            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, fileinfo, zip, sqlite, soap, bcmath, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt"
+            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, xdebug, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, pdo_pgsql, fileinfo, zip, sqlite, soap, bcmath, gmp, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite, mcrypt"
           - php-version: "8.3"
-            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, fileinfo, zip, sqlite, soap, bcmath, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite"
+            php-extensions-full: "none, iconv, json, libxml, xml, dom, simplexml, xmlwriter, tokenizer, mbstring, xdebug, apcu, ctype, openssl, curl, gd, posix, pdo_sqlite, pdo_mysql, pdo_pgsql, fileinfo, zip, sqlite, soap, bcmath, gmp, igbinary, bz2, lzf, memcached, memcache, ldap, sqlite"
             experimental: true
 
     steps:
@@ -183,7 +185,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           tools: cs2pr
           extensions: ${{ matrix.php-extensions-full }}
-          ini-values: ${{ env.PHP_INI_VALUES }}, apc.enable_cli=1
+          ini-values: ${{ env.PHP_INI_VALUES }}, apc.enable_cli=1, xdebug.mode=coverage, xdebug.overload_var_dump=0
         env:
           # https://github.com/shivammathur/setup-php/issues/407#issuecomment-773675741
           fail-fast: true
