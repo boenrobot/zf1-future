@@ -745,9 +745,9 @@ class Zend_Controller_FrontTest extends TestCase
         $body = $this->_controller->getResponse()->getBody();
         $this->assertStringNotContainsString('Type error action called', $body);
         if (version_compare(PHP_VERSION, '8.0.0', '<')) {
-            $this->assertEquals("EXCEPTION_OTHER\nReturn value of IndexController::produceTypeError() must be an instance of IndexController, instance of stdClass returned", $body);
+            $this->assertEquals("EXCEPTION_OTHER" . PHP_EOL . "Return value of IndexController::produceTypeError() must be an instance of IndexController, instance of stdClass returned", $body);
         } else {
-            $this->assertEquals("EXCEPTION_OTHER\nIndexController::produceTypeError(): Return value must be of type IndexController, stdClass returned", $body);
+            $this->assertEquals("EXCEPTION_OTHER" . PHP_EOL . "IndexController::produceTypeError(): Return value must be of type IndexController, stdClass returned", $body);
         }
         
         $this->assertSame(500, $this->_controller->getResponse()->getHttpResponseCode());
@@ -811,9 +811,9 @@ class Zend_Controller_FrontTest extends TestCase
 
         $body = $this->_controller->getResponse()->getBody();
         if (version_compare(PHP_VERSION, '8.0.0', '<')) {
-            $this->assertEquals("EXCEPTION_OTHER\nReturn value of MyApp\Controller\Plugin\ThrowingPlugin::produceTypeError() must be an instance of MyApp\Controller\Plugin\ThrowingPlugin, instance of stdClass returned", $body);
+            $this->assertEquals("EXCEPTION_OTHER" . PHP_EOL . "Return value of MyApp\Controller\Plugin\ThrowingPlugin::produceTypeError() must be an instance of MyApp\Controller\Plugin\ThrowingPlugin, instance of stdClass returned", $body);
         } else {
-            $this->assertEquals("EXCEPTION_OTHER\nMyApp\Controller\Plugin\ThrowingPlugin::produceTypeError(): Return value must be of type MyApp\Controller\Plugin\ThrowingPlugin, stdClass returned", $body);
+            $this->assertEquals("EXCEPTION_OTHER" . PHP_EOL . "MyApp\Controller\Plugin\ThrowingPlugin::produceTypeError(): Return value must be of type MyApp\Controller\Plugin\ThrowingPlugin, stdClass returned", $body);
         }
         $this->assertSame(500, $this->_controller->getResponse()->getHttpResponseCode());
     }

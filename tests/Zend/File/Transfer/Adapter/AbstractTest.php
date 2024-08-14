@@ -856,6 +856,9 @@ class Zend_File_Transfer_Adapter_AbstractTest extends TestCase
      */
     public function testSetDestinationWithNonExistingPathShouldThrowException()
     {
+        if (stripos(PHP_OS, 'WIN') === 0) {
+            $this->markTestSkipped('Windows does not support this permission model');
+        }
         if (getenv('CI')) {
             $this->markTestIncomplete("Don't know why on gitlab action docker runner fail this test case");
         }

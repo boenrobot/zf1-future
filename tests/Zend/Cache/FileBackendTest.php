@@ -73,6 +73,7 @@ class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest
     protected function tear_down()
     {
         parent::tear_down();
+        $this->_instance->clean();
         unset($this->_instance);
     }
 

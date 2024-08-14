@@ -204,7 +204,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
                 throw new Zend_Filter_Exception('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
-            $value    = iconv('', $enc . '//IGNORE', (string) $value);
+            $value    = iconv($enc, $enc . '//IGNORE', (string) $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 require_once 'Zend/Filter/Exception.php';
