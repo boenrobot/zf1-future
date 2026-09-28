@@ -405,7 +405,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Set object state from Zend_Config object
      *
      * @param  Zend_Config $config
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setConfig(Zend_Config $config)
     {
@@ -1175,7 +1175,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Add many prefix paths at once
      *
      * @param  array $spec
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function addPrefixPaths(array $spec)
     {
@@ -1313,7 +1313,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Set multiple validators, overwriting previous validators
      *
      * @param  array $validators
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setValidators(array $validators)
     {
@@ -1569,7 +1569,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Same as addErrorMessages(), but clears custom error message stack first
      *
      * @param  array $messages
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setErrorMessages(array $messages)
     {
@@ -1670,7 +1670,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Overwrite any previously set error messages and flag as failed validation
      *
      * @param  array $messages
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setErrors(array $messages)
     {
@@ -1786,7 +1786,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Add filters to element, overwriting any already existing
      *
      * @param  array $filters
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setFilters(array $filters)
     {
@@ -2026,7 +2026,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * Overwrite all decorators
      *
      * @param  array $decorators
-     * @return Zend_Form_Element
+     * @return $this
      */
     public function setDecorators(array $decorators)
     {
